@@ -49,10 +49,17 @@ function addUser(user){
     </li>`;
     parentNode.innerHTML =  parentNode.innerHTML + childHTML;
 }
-function editUser(name,emailId){
-    document.getElementById('username').value = name;
-    document.getElementById('emailId').value = emailId;
-    deleteUser(emailId);
+function editUser(name,emailId,_id){
+    axios.put(`https://crudcrud.com/api/f15fe514c0a641a988ee0a1995108819/appointmentData/${_id}`)
+    .then((response) =>{
+        document.getElementById('username').value = name;
+        document.getElementById('emailId').value = emailId;
+        deleteUser(emailId);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+    
 }
 
 
