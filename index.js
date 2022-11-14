@@ -4,15 +4,17 @@ btn.addEventListener('click', (e)=>{
     document.querySelector('.btn').style.background = "black";
 });
 window.addEventListener("DOMContentLoaded", () => {
-    const localStorageObj = localStorage;
-    const localstoragekeys  = Object.keys(localStorageObj)
-    for(var i =0; i< localstoragekeys.length; i++){
-        const key = localstoragekeys[i]
-        const userDetailsString = localStorageObj[key];
-    
-        const userDetailsObj = JSON.parse(userDetailsString);
-        addUser(userDetailsObj)
-    }
+    axios.get("https://crudcrud.com/api/f15fe514c0a641a988ee0a1995108819/appointmentData")
+         .then((response) => {
+            //console.log(response);
+            for(var i=0; i<response.data.length; i++){
+                addUser(response.data[i]);
+            }
+         })
+         .catch((error) => {
+            console.log(error);
+         })
+   
 })
 function saveToLocalStorage(event){
     event.preventDefault();
