@@ -58,10 +58,10 @@ function editUser(name,emailId){
 
 //////////////////////////////DELETE USER FROM SERVER //////////////////////////////
 
-function deleteUser(userId){
-    axios.delete(`https://crudcrud.com/api/f15fe514c0a641a988ee0a1995108819/appointmentData/${userId}`)
+function deleteUser(_id){
+    axios.delete(`https://crudcrud.com/api/f15fe514c0a641a988ee0a1995108819/appointmentData/${_id}`)
     .then((response)=>{
-    removeUser(userId)
+    removeUser(_id)
     })
     .catch((err) => {
         console.log(err)
@@ -70,9 +70,9 @@ function deleteUser(userId){
 
 //////////////////////////////DELETE USER FROM SCREEN //////////////////////////////
 
-function removeUser(userId){
+function removeUser(_id){
     const parentNode = document.getElementById('listOfUsers');
-    const deletingChildNode = document.getElementById(userId);
+    const deletingChildNode = document.getElementById(_id);
     if(deletingChildNode){
         parentNode.removeChild(deletingChildNode);
     }
