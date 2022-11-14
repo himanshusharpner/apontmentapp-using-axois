@@ -49,21 +49,32 @@ function addUser(user){
     </li>`;
     parentNode.innerHTML =  parentNode.innerHTML + childHTML;
 }
-function deleteUser(emailId){
-    // console.log(emailId)
-    localStorage.removeItem(emailId);
-    removeUser(emailId);
-}
-function removeUser(emailId){
-    const parentNode = document.getElementById('listOfUsers');
-    const deletingChildNode = document.getElementById(emailId);
-    if(deletingChildNode){
-        parentNode.removeChild(deletingChildNode);
-    }
-    
-}   
 function editUser(name,emailId){
     document.getElementById('username').value = name;
     document.getElementById('emailId').value = emailId;
     deleteUser(emailId);
 }
+
+
+//////////////////////////////DELETE USER FROM SERVER //////////////////////////////
+
+function deleteUser(userId){
+    axios.delete(`https://crudcrud.com/api/f15fe514c0a641a988ee0a1995108819/appointmentData/${userId}`)
+    .then((response)=>{
+    removeUser(userId)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+
+//////////////////////////////DELETE USER FROM SCREEN //////////////////////////////
+
+function removeUser(userId){
+    const parentNode = document.getElementById('listOfUsers');
+    const deletingChildNode = document.getElementById(userId);
+    if(deletingChildNode){
+        parentNode.removeChild(deletingChildNode);
+    }
+}
+
